@@ -47,10 +47,15 @@ int main()
 		STUDENT_DATA student{};
 		student.last = substrings[0];
 		student.first = substrings[1];
+		#ifdef _DEBUG
+		cout << "firstname: " << student.first << "\t" << "lastname: " << student.last << endl;
+		#endif
+
 
 		//push to students vector
 		students.push_back(student);
 	}
 
-	cout << "done" << endl;
+	
+
 }
