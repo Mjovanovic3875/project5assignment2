@@ -7,22 +7,35 @@
 
 using namespace std;
 
+#define PRE_RELEASE
+
 struct STUDENT_DATA
 {
 	string first;
 	string last;
+	#ifdef PRE_RELEASE
+	string email;
+	#endif
 };
 
+int main(){
+	#ifdef PRE_RELEASE
+		cout << "PreRelease Version" << endl;
+	#else
+		cout << "Regular code running" << endl;
+	#endif 
 
-int main()
-{
 	ifstream file;
 
 	vector<STUDENT_DATA> students;
 
 	string line;
 
-	file.open("StudentData.txt");
+	#ifdef PRE_RELEASE
+		file.open("StudentData_Emails.txt");
+	#else
+		file.open("StudentData.txt");
+	#endif 
 
 	//will read all lines in file
 	while(getline(file,line))
@@ -47,10 +60,14 @@ int main()
 		STUDENT_DATA student{};
 		student.last = substrings[0];
 		student.first = substrings[1];
+		
+		#ifdef PRE_RELEASE
+			student.email = substrings[2];
+		#endif 
+
 		#ifdef _DEBUG
 		cout << "firstname: " << student.first << "\t" << "lastname: " << student.last << endl;
 		#endif
-
 
 		//push to students vector
 		students.push_back(student);
